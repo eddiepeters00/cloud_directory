@@ -17,7 +17,7 @@ const DB_CONFIG = {
 
 //AWS
 const AWS_DEFAULT_REGION = process.env.AWS_DEFAULT_REGION;
-const AWS_BUCKET = process.env.AWS_SOLAR_MANAGEMENT_BUCKET;
+const AWS_BUCKET = process.env.AWS_CLOUD_DIRECTORY_BUCKET;
 const AWS_CONFIG = {
   region: `${AWS_DEFAULT_REGION}`,
   bucket: `${AWS_BUCKET}`,
