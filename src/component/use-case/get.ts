@@ -7,21 +7,19 @@ export default function createGet({ findDocuments }) {
     );
 
     if (Object.values(params).length) {
-      params = {};
+      const { parentFolderId } = params;
+
+      if (!parentFolderId) {
+        throw new Error("");
+      }
 
       Object.keys(params).forEach(
         (key) => params[key] === undefined && delete params[key]
       );
     }
 
-    const dbResults = await findDocuments({ query: params, dbConfig });
+    const files = await findDocuments({ query: params, dbConfig });
 
-    const results = dbResults.map((post) => {
-      return {
-        post,
-      };
-    });
-
-    return results;
+    return { files };
   }
 }
