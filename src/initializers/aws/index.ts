@@ -26,7 +26,7 @@ class AwsS3Client {
   }
 
   //Upload to bucket
-  async signedUrlForUpload(key: string) {
+  async signUrlForUpload(key: string) {
     const command = new PutObjectCommand({
       Bucket: this.bucket,
       Key: key,
@@ -36,7 +36,7 @@ class AwsS3Client {
   }
 
   //Download from bucket
-  async signedUrlForDownload(key: string) {
+  async signUrlForDownload(key: string) {
     const command = new GetObjectCommand({
       Bucket: this.bucket,
       Key: key,
