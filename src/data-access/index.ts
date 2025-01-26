@@ -4,6 +4,7 @@ import {
   findDocuments as makeFindDocuments,
 } from "../libs/mongoDb";
 
+//Data access to database
 const insertDocument = ({ document, dbConfig }) =>
   insertOneDocument({ document, ...dbConfig });
 

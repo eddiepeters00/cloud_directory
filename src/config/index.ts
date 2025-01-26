@@ -23,9 +23,17 @@ const AWS_CONFIG = {
   bucket: `${AWS_BUCKET}`,
 };
 
+//Error messages
+const ERROR_MSG = {
+  post: {
+    MISSING_PARAMETER: "missing parameter: ",
+  },
+};
+
 export default Object.freeze({
   NODE_HOSTNAME,
   NODE_PORT,
   DB_CONFIG,
   AWS_CONFIG,
+  ERROR_MSG,
 });
