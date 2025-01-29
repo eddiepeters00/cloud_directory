@@ -1,7 +1,8 @@
 export default function createGetAllFiles({ findDocuments, fileDownload }) {
   return Object.freeze({ getAllFiles });
 
-  async function getAllFiles({ parentFolderId, dbConfig }) {
+  async function getAllFiles({ params, dbConfig }) {
+    const { parentFolderId } = params;
     const files = await findDocuments({
       query: { parentFolderId },
       collection: "files",

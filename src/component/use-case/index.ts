@@ -5,41 +5,70 @@ import {
   createGetParentFolders,
 } from "./get";
 import config from "../../config";
-import { findDocuments, fileDownload } from "../../data-access";
+import {
+  findDocuments,
+  fileDownload,
+  fileUpload,
+  insertDocument,
+} from "../../data-access";
+import { createPostFile, createPostFolder } from "./post";
 const dbConfig = config.DB_CONFIG;
 
-const getAllFiles = ({ parentFolderId }) =>
+//GET
+const getAllFiles = ({ params }) =>
   createGetAllFiles({
     findDocuments,
     fileDownload,
   }).getAllFiles({
-    parentFolderId,
+    params,
     dbConfig,
   });
 
-const getAllFolders = ({ parentFolderId }) =>
+const getAllFolders = ({ params }) =>
   createGetAllFolders({
     findDocuments,
   }).getAllFolders({
-    parentFolderId,
+    params,
     dbConfig,
   });
 
-const getAllFilesFromFolder = ({ id }) =>
+const getAllFilesFromFolder = ({ params }) =>
   createGetFilesFromFolder({
     getAllFiles,
     getAllFolders,
   }).getFilesFromFolder({
-    id,
+    params,
     dbConfig,
   });
 
-const getParentFolders = ({ folderId }) =>
+const getParentFolders = ({ params }) =>
   createGetParentFolders({
     getAllFolders,
   }).getParentFolders({
-    folderId,
+    params,
     dbConfig,
   });
 
-export { getAllFiles, getAllFolders, getParentFolders, getAllFilesFromFolder };
+//POST
+const postFile = ({ params }) =>
+  createPostFile({
+    fileUpload,
+    insertDocument,
+  }).postFile({
+    params,
+    dbConfig,
+  });
+
+const postFolder = ({ params }) =>
+  createPostFolder({
+    insertDocument,
+  })({ params, dbConfig });
+
+export {
+  getAllFiles,
+  getAllFolders,
+  getParentFolders,
+  getAllFilesFromFolder,
+  postFile,
+  postFolder,
+};

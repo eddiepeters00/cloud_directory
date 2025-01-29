@@ -4,7 +4,8 @@ export default function createGetFilesFromFolder({
 }) {
   return Object.freeze({ getFilesFromFolder });
 
-  async function getFilesFromFolder({ id, dbConfig }) {
+  async function getFilesFromFolder({ params, dbConfig }) {
+    const { id } = params;
     const getFilesFromParentOrFalse = async (parentId: string) => {
       const filesFromParent = await getAllFiles(parentId, dbConfig);
       if (!filesFromParent) return false;

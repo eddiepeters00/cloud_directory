@@ -1,7 +1,8 @@
 export default function createGetParentFolders({ getAllFolders }) {
   return Object.freeze({ getParentFolders });
 
-  async function getParentFolders({ folderId, dbConfig }) {
+  async function getParentFolders({ params, dbConfig }) {
+    const { folderId } = params;
     const getCurrentFolder = async (folderId: string) => {
       return await getAllFolders(folderId, dbConfig);
     };
