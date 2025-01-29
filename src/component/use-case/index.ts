@@ -16,6 +16,7 @@ import {
 import { createPostFile, createPostFolder } from "./post";
 import { createDeleteFile, createDeleteFolder } from "./delete";
 const dbConfig = config.DB_CONFIG;
+const awsConfig = config.AWS_CONFIG;
 
 //GET
 const getAllFiles = ({ params }) =>
@@ -25,6 +26,7 @@ const getAllFiles = ({ params }) =>
   }).getAllFiles({
     params,
     dbConfig,
+    awsConfig,
   });
 
 const getAllFolders = ({ params }) =>
@@ -42,6 +44,7 @@ const getAllFilesFromFolder = ({ params }) =>
   }).getFilesFromFolder({
     params,
     dbConfig,
+    awsConfig,
   });
 
 const getParentFolders = ({ params }) =>
@@ -60,6 +63,7 @@ const postFile = ({ params }) =>
   }).postFile({
     params,
     dbConfig,
+    awsConfig,
   });
 
 const postFolder = ({ params }) =>
@@ -75,6 +79,7 @@ const deleteFile = ({ params }) =>
   }).deleteFile({
     params,
     dbConfig,
+    awsConfig,
   });
 
 const deleteFolder = ({ params }) =>
@@ -86,6 +91,7 @@ const deleteFolder = ({ params }) =>
   }).deleteFolder({
     params,
     dbConfig,
+    awsConfig,
   });
 
 export {

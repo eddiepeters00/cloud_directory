@@ -6,7 +6,7 @@ export default function createDeleteFolder({
 }) {
   return Object.freeze({ deleteFolder });
 
-  async function deleteFolder({ params, dbConfig }) {
+  async function deleteFolder({ params, dbConfig, awsConfig }) {
     const { folderId } = params;
     if (!folderId) {
       throw new Error("Missing required params");
@@ -14,7 +14,11 @@ export default function createDeleteFolder({
 
     //Delete all files in a folder
     const deleteFiles = async (parentId: string) => {
-      const files = await getAllFiles({ parentFolderId: parentId, dbConfig });
+      const files = await getAllFiles({
+        parentFolderId: parentId,
+        dbConfig,
+        awsConfig,
+      });
       if (!files) return;
 
       //Iterate all files and delete
@@ -26,6 +30,7 @@ export default function createDeleteFolder({
             parentFolderId: file.parentFolderId,
           },
           dbConfig,
+          awsConfig,
         });
       }
     };

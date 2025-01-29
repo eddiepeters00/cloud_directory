@@ -1,7 +1,7 @@
 export default function createDeleteFile({ fileDelete, deleteDocument }) {
   return Object.freeze({ deleteFile });
 
-  async function deleteFile({ params, dbConfig }) {
+  async function deleteFile({ params, dbConfig, awsConfig }) {
     const { documentId, key } = params;
     if (!documentId || !key) {
       throw new Error("Missing required params");
@@ -9,7 +9,7 @@ export default function createDeleteFile({ fileDelete, deleteDocument }) {
 
     try {
       //Delete file from AWS
-      await fileDelete({ key });
+      await fileDelete({ key, awsConfig });
 
       //Delete from DB
       await deleteDocument({
