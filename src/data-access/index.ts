@@ -1,4 +1,9 @@
 import {
+  deleteObject,
+  signedUrlForDownload,
+  signedUrlForUpload,
+} from "../libs/aws/S3";
+import {
   insertOneDocument,
   updateDocument as makeUpdateDocument,
   findDocuments as makeFindDocuments,
@@ -14,4 +19,20 @@ const updateDocument = ({ query, values, dbConfig }) =>
 const findDocuments = ({ query, dbConfig }) =>
   makeFindDocuments({ query, ...dbConfig });
 
-export { findDocuments, insertDocument, updateDocument };
+//Data access to cloud
+const fileUpload = ({ key, awsConfig }) =>
+  signedUrlForUpload({ key, ...awsConfig });
+
+const fileDownload = ({ key, awsConfig }) =>
+  signedUrlForDownload({ key, ...awsConfig });
+
+const fileDelete = ({ key, awsConfig }) => deleteObject({ key, ...awsConfig });
+
+export {
+  findDocuments,
+  insertDocument,
+  updateDocument,
+  fileUpload,
+  fileDownload,
+  fileDelete,
+};
