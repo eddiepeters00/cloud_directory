@@ -3,6 +3,7 @@ export default function makeDB({ dbClient }) {
     insertOneDocument,
     findDocuments,
     updateDocument,
+    deleteDocument,
     dropDb,
   });
 
@@ -16,6 +17,13 @@ export default function makeDB({ dbClient }) {
   async function updateDocument({ query, values, dbName, dbUri, dbColl }) {
     const db = new dbClient({ dbName, dbUri, dbColl });
     const results = await db.updateDocument({ query, values });
+
+    return results;
+  }
+
+  async function deleteDocument({ query, values, dbName, dbUri, dbColl }) {
+    const db = new dbClient({ dbName, dbUri, dbColl });
+    const results = await db.deleteDocument({ query, values });
 
     return results;
   }

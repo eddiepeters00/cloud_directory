@@ -26,7 +26,21 @@ const updateDocument = ({ query, values, dbName, dbUri, dbColl }) =>
     dbColl,
   });
 
+const deleteDocument = ({ query, values, dbName, dbUri, dbColl }) =>
+  makeDb({ dbClient: MongoDBClient }).deleteDocument({
+    query,
+    values: { $set: values },
+    dbName,
+    dbUri,
+    dbColl,
+  });
 const dropDb = ({ test, dbName, dbUri, dbColl }) =>
   makeDb({ dbClient: MongoDBClient }).dropDb({ test, dbName, dbUri, dbColl });
 
-export { insertOneDocument, findDocuments, updateDocument, dropDb };
+export {
+  insertOneDocument,
+  findDocuments,
+  updateDocument,
+  deleteDocument,
+  dropDb,
+};

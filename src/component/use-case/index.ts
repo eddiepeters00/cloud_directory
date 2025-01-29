@@ -9,9 +9,12 @@ import {
   findDocuments,
   fileDownload,
   fileUpload,
+  fileDelete,
   insertDocument,
+  deleteDocument,
 } from "../../data-access";
 import { createPostFile, createPostFolder } from "./post";
+import { createDeleteFile, createDeleteFolder } from "./delete";
 const dbConfig = config.DB_CONFIG;
 
 //GET
@@ -64,6 +67,27 @@ const postFolder = ({ params }) =>
     insertDocument,
   })({ params, dbConfig });
 
+//DELETE
+const deleteFile = ({ params }) =>
+  createDeleteFile({
+    deleteDocument,
+    fileDelete,
+  }).deleteFile({
+    params,
+    dbConfig,
+  });
+
+const deleteFolder = ({ params }) =>
+  createDeleteFolder({
+    deleteDocument,
+    deleteFile,
+    getAllFiles,
+    getParentFolders,
+  }).deleteFolder({
+    params,
+    dbConfig,
+  });
+
 export {
   getAllFiles,
   getAllFolders,
@@ -71,4 +95,6 @@ export {
   getAllFilesFromFolder,
   postFile,
   postFolder,
+  deleteFile,
+  deleteFolder,
 };

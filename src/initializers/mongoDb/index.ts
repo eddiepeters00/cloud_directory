@@ -58,6 +58,20 @@ class mongoDBClient {
     return res;
   }
 
+  async deleteDocument({ query, values }) {
+    if (!isObject(values) && isObject(query)) {
+      throw Error(
+        "mongoClient.delete: values, query and option should be an object."
+      );
+    }
+
+    console.log(`[MONGODB] Deleting document with query: ${query}`);
+    await this.connect();
+    const res = await this.db.collection(this.dbColl).deleteOne(query);
+    this.close();
+    return res;
+  }
+
   async close() {
     if (this.connection) this.connection.close();
     console.log(`[MONGODB] Connection closed...`);

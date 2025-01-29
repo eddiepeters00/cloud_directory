@@ -7,6 +7,7 @@ import {
   insertOneDocument,
   updateDocument as makeUpdateDocument,
   findDocuments as makeFindDocuments,
+  deleteDocument as makeDeleteDocument,
 } from "../libs/mongoDb";
 
 //Data access to database
@@ -18,6 +19,9 @@ const updateDocument = ({ query, values, dbConfig }) =>
 
 const findDocuments = ({ query, dbConfig }) =>
   makeFindDocuments({ query, ...dbConfig });
+
+const deleteDocument = ({ query, dbConfig }) =>
+  makeDeleteDocument({ query, ...dbConfig });
 
 //Data access to cloud
 const fileUpload = ({ key, awsConfig }) =>
@@ -32,6 +36,7 @@ export {
   findDocuments,
   insertDocument,
   updateDocument,
+  deleteDocument,
   fileUpload,
   fileDownload,
   fileDelete,
